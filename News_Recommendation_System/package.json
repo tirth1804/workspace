@@ -1,0 +1,11 @@
+{
+  "name": "news_recommendation_system",
+  "version": "1.0.0",
+  "description": "An internet-based news aggregator, providing hot news scraping on popular news sources, with recommendation feature based on users' preference with the help of Machine Learning.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
