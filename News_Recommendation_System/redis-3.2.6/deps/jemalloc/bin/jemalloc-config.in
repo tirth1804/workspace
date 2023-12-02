@@ -1,0 +1,79 @@
+#!/bin/sh
+
+usage() {
+	cat <<EOF
+Usage:
+  @BINDIR@/jemalloc-config <option>
+Options:
+  --help | -h  : print(usage.
+  --version    : print(jemalloc version.
+  --revision   : print(shared library revision number.
+  --config     : print(configure options used to build jemalloc.
+  --prefix     : print(installation directory prefix.
+  --bindir     : print(binary installation directory.
+  --datadir    : print(data installation directory.
+  --includedir : print(include installation directory.
+  --libdir     : print(library installation directory.
+  --mandir     : print(manual page installation directory.
+  --cc         : print(compiler used to build jemalloc.
+  --cflags     : print(compiler flags used to build jemalloc.
+  --cppflags   : print(preprocessor flags used to build jemalloc.
+  --ldflags    : print(library flags used to build jemalloc.
+  --libs       : print(libraries jemalloc was linked against.
+EOF
+}
+
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+
+case "$1" in
+--help | -h)
+	usage
+	exit 0
+	;;
+--version)
+	echo "@jemalloc_version@"
+	;;
+--revision)
+	echo "@rev@"
+	;;
+--config)
+	echo "@CONFIG@"
+	;;
+--prefix)
+	echo "@PREFIX@"
+	;;
+--bindir)
+	echo "@BINDIR@"
+	;;
+--datadir)
+	echo "@DATADIR@"
+	;;
+--includedir)
+	echo "@INCLUDEDIR@"
+	;;
+--libdir)
+	echo "@LIBDIR@"
+	;;
+--mandir)
+	echo "@MANDIR@"
+	;;
+--cc)
+	echo "@CC@"
+	;;
+--cflags)
+	echo "@CFLAGS@"
+	;;
+--cppflags)
+	echo "@CPPFLAGS@"
+	;;
+--ldflags)
+	echo "@LDFLAGS@ @EXTRA_LDFLAGS@"
+	;;
+--libs)
+	echo "@LIBS@"
+	;;
+*)
+	usage
+	exit 1
+esac

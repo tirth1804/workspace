@@ -15,7 +15,7 @@ def test_basic():
     received_msg = client.get_message()
 
     assert sent_msg == received_msg
-    print 'test_basic passed.'
+    print('test_basic passed.'
 
 if __name__ == '__main__':
     test_basic()

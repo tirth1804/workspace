@@ -65,19 +65,19 @@ def loadModel():
     y_train = train_df[0]
     classifier.evaluate(x_train, y_train)
 
-    print "Model update."
+    print("Model update.")
 
 
 restoreVars()
 loadModel()
 
-print "Model loaded."
+print("Model loaded.")
 
 
 class ReloadModelHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         # Reload model
-        print "Model update detected. Loading new model."
+        print("Model update detected. Loading new model.")
         time.sleep(MODEL_UPDATE_LAG_IN_SECONDS)
         restoreVars()
         loadModel()
@@ -88,13 +88,13 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
     def classify(self, text):
         text_series = pd.Series([text])
         predict_x = np.array(list(vocab_processor.transform(text_series)))
-        print predict_x
+        print(predict_x)
 
         y_predicted = [
             p['class'] for p in classifier.predict(
                 predict_x, as_iterable=True)
         ]
-        print y_predicted[0]
+        print(y_predicted[0])
         topic = news_classes.class_map[str(y_predicted[0])]
         return topic
 
@@ -110,7 +110,7 @@ http_server = pyjsonrpc.ThreadingHttpServer(
     RequestHandlerClass=RequestHandler
 )
 
-print "Starting predicting server ..."
-print "URL: http://" + str(SERVER_HOST) + ":" + str(SERVER_PORT)
+print("Starting predicting server ...")
+print("URL: http://" + str(SERVER_HOST) + ":" + str(SERVER_PORT))
 
 http_server.serve_forever()

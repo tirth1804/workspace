@@ -1,15 +1,15 @@
 """ Cloud AMQP Client """
 
-import json
-import pika
-
 import os
 import sys
+import json
+# type: ignore
+import pika
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', ''))
-from logger.log import LOGGING_OHTER
+# from logger.log import LOGGING_OHTER
 
-class CloudAMQPClient(object):
+class CloudAMQPClient:
     """ Cloud AMQP Client """
     def __init__(self, cloud_amqp_url, queue_name):
         self.cloud_amqp_url = cloud_amqp_url
@@ -30,20 +30,18 @@ class CloudAMQPClient(object):
                                    routing_key=self.queue_name,
                                    body=json.dumps(message))
         # LOGGING_OHTER.info('[x] Sent message to %s: %s' % (self.queue_name, message))
-        # print '[x] Sent message to %s: %s' % (self.queue_name, message)
+        # print('[x] Sent message to %s: %s' % (self.queue_name, message)
 
     # get a message
     def get_message(self):
         ''' get a message '''
-        method_frame, header_frame, body = self.channel.basic_get(self.queue_name)
+        method_frame, _, body = self.channel.basic_get(self.queue_name)
         if method_frame:
             # LOGGING_OHTER.info('[x] Sent message to %s: %s' % (self.queue_name, body))
-            # print '[x] Received message from %s: %s' % (self.queue_name, body)
+            # print('[x] Received message from %s: %s' % (self.queue_name, body)
             self.channel.basic_ack(method_frame.delivery_tag)
             return json.loads(body)
-        else:
-            print 'No message returned.'
-            return None
+        return None
 
     # BlockingConnection.sleep is a safer way to sleep than time.sleep().
     def sleep(self, seconds):

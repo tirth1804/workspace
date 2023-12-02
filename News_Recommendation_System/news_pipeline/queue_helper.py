@@ -37,16 +37,16 @@ def clear_queue(queue_url, queue_name):
         if scrape_news_queue_client is not None:
             msg = scrape_news_queue_client.get_message()
             if msg is None:
-                print "Cleared %d messages." % num_of_messages
+                print("Cleared %d messages." % num_of_messages
                 return
             num_of_messages += 1
 
 
 if __name__ == "__main__":
-    # print SCRAPE_NEWS_TASK_QUEUE_URL
-    # print SCRAPE_NEWS_TASK_QUEUE_URL_o == SCRAPE_NEWS_TASK_QUEUE_URL
-    # print SCRAPE_NEWS_TASK_QUEUE_NAME_o == SCRAPE_NEWS_TASK_QUEUE_NAME
-    # print DEDUPE_NEWS_TASK_QUEUE_URL_o == DEDUPE_NEWS_TASK_QUEUE_URL
-    # print DEDUPE_NEWS_TASK_QUEUE_NAME_o == DEDUPE_NEWS_TASK_QUEUE_NAME
+    # print(SCRAPE_NEWS_TASK_QUEUE_URL
+    # print(SCRAPE_NEWS_TASK_QUEUE_URL_o == SCRAPE_NEWS_TASK_QUEUE_URL
+    # print(SCRAPE_NEWS_TASK_QUEUE_NAME_o == SCRAPE_NEWS_TASK_QUEUE_NAME
+    # print(DEDUPE_NEWS_TASK_QUEUE_URL_o == DEDUPE_NEWS_TASK_QUEUE_URL
+    # print(DEDUPE_NEWS_TASK_QUEUE_NAME_o == DEDUPE_NEWS_TASK_QUEUE_NAME
     clear_queue(SCRAPE_NEWS_TASK_QUEUE_URL, SCRAPE_NEWS_TASK_QUEUE_NAME)
     clear_queue(DEDUPE_NEWS_TASK_QUEUE_URL, DEDUPE_NEWS_TASK_QUEUE_NAME)

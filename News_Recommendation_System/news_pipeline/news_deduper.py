@@ -52,13 +52,13 @@ def handle_message(msg):
         tfidf = TfidfVectorizer().fit_transform(documents)
         pairwise_sim = tfidf * tfidf.T
 
-        print pairwise_sim
+        print(pairwise_sim)
 
         rows, _ = pairwise_sim.shape
 
         for row in range(1, rows):
             if pairwise_sim[row, 0] > SAME_NEWS_SIMILARITY_THRESHOLD:
-                print "Duplicated news. Ignore."
+                print("Duplicated news. Ignore.")
                 return
 
     task['publishedAt'] = parser.parse(task['publishedAt'])
@@ -73,7 +73,7 @@ def handle_message(msg):
 
     db[NEWS_TABLE_NAME].replace_one({'digest': task['digest']}, task, upsert=True)
     LOGGING_NEWS_DEDUPER.info('[x] Insert %s into MongoDB' % (task['title']))
-    # print('got message! after insert')
+    # print(('got message! after insert')
 
 while True:
     if cloudAMQP_client is not None:
@@ -83,7 +83,7 @@ while True:
             try:
                 handle_message(msg)
             except Exception as e:
-                print e
+                print(e)
                 pass
 
         cloudAMQP_client.sleep(SLEEP_TIME_IN_SECONDS)

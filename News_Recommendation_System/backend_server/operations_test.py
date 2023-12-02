@@ -11,9 +11,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 def test_getNewsSummariesForUser_basic():
     news = operations.getNewsSummariesForUser('test', 1)
-    print news
+    print(news)
     assert len(news) > 0
-    print 'test_getNewsSummariesForUser_basic passed!'
+    print('test_getNewsSummariesForUser_basic passed!'0
 
 def test_getNewsSummariesForUser_pagination():
     news_page_1 = operations.getNewsSummariesForUser('test', 1)
@@ -27,7 +27,7 @@ def test_getNewsSummariesForUser_pagination():
     digests_page_2_set = Set([news['digest'] for news in news_page_2])
     assert len(digests_page_1_set.intersection(digests_page_2_set)) == 0
 
-    print 'test_getNewsSummariesForUser_pagination passed!'
+    print('test_getNewsSummariesForUser_pagination passed!')
 
 if __name__ == "__main__":
     test_getNewsSummariesForUser_basic()

@@ -14,4 +14,4 @@ def get_config(path):
             config = yaml.load(stream)
             return config
         except yaml.YAMLError as exc:
-            print exc
+            print(exc)

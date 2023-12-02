@@ -30,7 +30,7 @@ def test_basic():
     assert model is not None
     assert len(model['preference']) == NUM_OF_CLASSES
 
-    print 'test_basic passed!'
+    print('test_basic passed!'
 
 
 if __name__ == "__main__":

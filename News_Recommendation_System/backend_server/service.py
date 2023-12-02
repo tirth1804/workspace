@@ -19,7 +19,7 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
     @pyjsonrpc.rpcmethod
     def add(self, num1, num2):  # pylint: disable=no-self-use
         """ Test method """
-        print "add is called with %d and %d" % (num1, num2)
+        print("add is called with %d and %d" % (num1, num2))
         return num1 + num2
 
     """ Get news summaries for a user """
@@ -38,6 +38,6 @@ HTTP_SERVER = pyjsonrpc.ThreadingHttpServer(
     RequestHandlerClass=RequestHandler
 )
 
-print "Starting HTTP server on %s:%d" % (SERVER_HOST, SERVER_PORT)
+print("Starting HTTP server on %s:%d" % (SERVER_HOST, SERVER_PORT))
 
 HTTP_SERVER.serve_forever()

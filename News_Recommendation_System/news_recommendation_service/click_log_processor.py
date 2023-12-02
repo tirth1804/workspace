@@ -60,7 +60,7 @@ def handle_message(msg):
 
     # If model not exists, create a new one
     if model is None:
-        print 'Creating preference model for new user: %s' % userId
+        print('Creating preference model for new user: %s' % userId)
         new_model = {'userId' : userId}
         preference = {}
         for i in news_classes.classes:
@@ -68,17 +68,17 @@ def handle_message(msg):
         new_model['preference'] = preference
         model = new_model
 
-    print 'Updating preference model for new user: %s' % userId
+    print('Updating preference model for new user: %s' % userId)
 
     # Update model using time decaying method
     news = db[NEWS_TABLE_NAME].find_one({'digest': newsId})
     if (news is None
         or 'class' not in news
         or news['class'] not in news_classes.classes):
-        print news is None
-        print 'class' not in news
-        print news['class'] not in news_classes.classes
-        print 'Skipping processing...'
+        print(news is None)
+        print('class' not in news)
+        print(news['class'] not in news_classes.classes)
+        print('Skipping processing...')
         return
 
     click_class = news['class']
@@ -93,9 +93,9 @@ def handle_message(msg):
             model['preference'][i] = float((1 - ALPHA) * model['preference'][i])
 
     db[PREFERENCE_MODEL_TABLE_NAME].replace_one({'userId': userId}, model, upsert=True)
-    print "--------------------------------------"
-    print PREFERENCE_MODEL_TABLE_NAME
-    print "--------------------------------------"
+    print("--------------------------------------")
+    print(PREFERENCE_MODEL_TABLE_NAME)
+    print("--------------------------------------")
     
 
 
@@ -108,7 +108,7 @@ def run():
                 try:
                     handle_message(msg)
                 except Exception as e:
-                    print e
+                    print(e)
                     pass
             # Remove this if this becomes a bottleneck.
             cloudAMQP_client.sleep(SLEEP_TIME_IN_SECONDS)

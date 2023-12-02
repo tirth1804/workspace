@@ -12,7 +12,7 @@ def test_basic():
     assert db_name.testCollection.count() == 1
     db_name.testCollection.drop()
     assert db_name.testCollection.count() == 0
-    print 'test_basic passed.'
+    print('test_basic passed.'
 
 if __name__ == "__main__":
     test_basic()

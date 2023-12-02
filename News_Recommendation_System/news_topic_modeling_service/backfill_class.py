@@ -18,9 +18,9 @@ if __name__ == '__main__':
     count = 0
     for news in cursor:
         count += 1
-        print count
+        print(count
         if 'class' not in news:
-            print 'Populating classes...'
+            print('Populating classes...'
             description = news['description']
             if description is None:
                 description = news['title']

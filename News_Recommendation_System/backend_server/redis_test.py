@@ -14,7 +14,7 @@ if (redis_client.get(key) is None):
 else:
     count = redis_client.get(key)
 
-print key, count + 1
+print(key, count + 1
 redis_client.set(key, count + 1)
 
-print count
+print(count

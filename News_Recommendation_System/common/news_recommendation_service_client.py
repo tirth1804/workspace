@@ -10,6 +10,6 @@ client = pyjsonrpc.HttpClient(url=URL)
 
 def getPreferenceForUser(userId):
     preference = client.call('getPreferenceForUser',userId)
-    print "Preference list: %s" % str(preference)
+    print("Preference list: %s" % str(preference)
     return preference
 
