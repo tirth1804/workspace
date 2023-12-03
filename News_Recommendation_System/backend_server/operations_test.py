@@ -13,7 +13,7 @@ def test_getNewsSummariesForUser_basic():
     news = operations.getNewsSummariesForUser('test', 1)
     print(news)
     assert len(news) > 0
-    print('test_getNewsSummariesForUser_basic passed!'0
+    print('test_getNewsSummariesForUser_basic passed!')
 
 def test_getNewsSummariesForUser_pagination():
     news_page_1 = operations.getNewsSummariesForUser('test', 1)

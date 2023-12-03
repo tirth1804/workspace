@@ -42,7 +42,7 @@ def getNewsSummariesForUser(user_id, page_num):
 
     # The final list of news to be returned.
     sliced_news = []
-    print('getNewsSummariesForUser'
+    print('getNewsSummariesForUser')
 
     if redis_client.get(user_id) is not None:
         news_digests = pickle.loads(redis_client.get(user_id))
@@ -51,7 +51,7 @@ def getNewsSummariesForUser(user_id, page_num):
         # If end_index is out of range (begin_index is within the range), this
         # will return all remaining news ids.
         sliced_news_digests = news_digests[begin_index:end_index]
-        print(sliced_news_digests
+        print(sliced_news_digests)
         db = mongodb_client.get_db()
         sliced_news = list(db[NEWS_TABLE_NAME].find({'digest':{'$in':sliced_news_digests}}))
     else:
@@ -66,9 +66,9 @@ def getNewsSummariesForUser(user_id, page_num):
 
     # Get preference for the user
     preference = news_recommendation_service_client.getPreferenceForUser(user_id)
-    print("-----------------222-----------------"
-    print(preference
-    print("-----------------222-----------------"
+    print("-----------------222-----------------")
+    print(preference)
+    print("-----------------222-----------------")
     topPreference = None
 
     if preference is not None and len(preference) > 0:
@@ -85,11 +85,11 @@ def getNewsSummariesForUser(user_id, page_num):
 
 
 def logNewsClickForUser(user_id, news_id, user_agent, news_category):
-    print('[logNewsClickForUser]\n'
-    print('user_id:', user_id
-    print('news_id:', news_id
-    print('user_agent:', user_agent
-    print('news_category:', news_category
+    print('[logNewsClickForUser]\n')
+    print('user_id:', user_id)
+    print('news_id:', news_id)
+    print('user_agent:', user_agent)
+    print('news_category:', news_category)
 
     # signup
 
@@ -107,7 +107,7 @@ def logNewsClickForUser(user_id, news_id, user_agent, news_category):
 
     # save daily log
     day_click_logs_table_name = CLICK_LOGS_TABLE_NAME + datetime.today().strftime('_%Y-%m-%d')
-    print('table: ' + day_click_logs_table_name
+    print('table: ' + day_click_logs_table_name)
     db[day_click_logs_table_name].insert(message)
 
     # count clickinng number evey hour
@@ -148,7 +148,7 @@ def addOne(key, expire_seconds=DEFAULT_EXPIRE_SECONDS):
         count = int(redis_client.get(key))
     redis_client.set(key, count + 1)
     redis_client.expire(key, expire_seconds)
-    print(count
+    print(count)
 
 
 def update_hour_clicking_number():
@@ -157,18 +157,18 @@ def update_hour_clicking_number():
     '''
     hour = datetime.today().strftime(DEFAULT_HOUR_FORMAT)
     key = HOUR_CLICKING_NUMBER + hour
-    print(key
+    print(key)
     addOne(key)
 
 
 def update_daily_active_users_freq(user_id):
-    print('update_daily_active_users_freq'
+    print('update_daily_active_users_freq')
     day = datetime.today().strftime(DEFAULT_DAY_FORMAT)
     key = DAILY_ACTIVE_USERS_FREQ + day + user_id
     addOne(key)
 
 def update_daily_active_news_freq(news_id):
-    print('update_daily_active_news_freq'
+    print('update_daily_active_news_freq')
     day = datetime.today().strftime(DEFAULT_DAY_FORMAT)
     key = DAILY_ACTIVE_NEWS_FREQ + day + news_id
     addOne(key, 60 * 60 * 24)
@@ -177,7 +177,7 @@ def update_daily_active_users(user_id):
     '''
     if user is NOT exist in daily_active_users_freq, add one
     '''
-    print('===============update_daily_active_users============'
+    print('===============update_daily_active_users============')
     day = datetime.today().strftime(DEFAULT_DAY_FORMAT)
 
     # daily_active_users_freq
@@ -186,10 +186,10 @@ def update_daily_active_users(user_id):
     key = DAILY_ACTIVE_USERS + day
 
     # if user_id is not in active
-    print("daily_active_users_freq:" + daily_active_users_freq
-    print("key: " + key
+    print("daily_active_users_freq:" + daily_active_users_freq)
+    print("key: " + key)
     if redis_client.get(daily_active_users_freq) is None:
-        print("no existed"
+        print("no existed")
         addOne(key)
 
 
@@ -205,7 +205,7 @@ devices = [
 
 def update_user_agent(user_agent):
     device = get_user_device(user_agent)
-    print("device:%s", device
+    print("device:%s", device)
     addOne(device)
 
 def get_user_device(user_agent):
@@ -216,5 +216,5 @@ def get_user_device(user_agent):
 
 
 def update_news_category(news_category):
-    print("news_category:%s", news_category
+    print("news_category:%s", news_category)
     addOne(news_category.lower())

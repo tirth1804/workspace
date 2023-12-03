@@ -6,9 +6,9 @@ CNN_NEWS_URL = "http://edition.cnn.com/2017/01/17/us/fort-lauderdale-shooter-isi
 def test_basic():
     news = scraper.extract_news(CNN_NEWS_URL)
 
-    print(news
+    print(news)
     assert EXPECTED_NEWS in news
-    print('test_basic passed!'
+    print('test_basic passed!')
 
 if __name__ == "__main__":
     test_basic()
